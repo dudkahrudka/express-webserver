@@ -19,5 +19,10 @@ module.exports = {
     res.render('galeria', {
       title: 'galeria'
     })
+  },
+  kontakt: (req,res) => {
+    res.render('kontakt', {
+      title: 'kontakt'
+    })
   }
 }
