@@ -1,3 +1,12 @@
+const mysql = require('mysql2')
+
+const conn = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'blog'
+})
+
 module.exports = {
   index: (req, res) => {
     res.render('index', {
@@ -23,6 +32,15 @@ module.exports = {
   kontakt: (req,res) => {
     res.render('kontakt', {
       title: 'kontakt'
+    })
+  },
+  posts: (req,res) => {
+    conn.query(`SELECT title FROM posts WHERE id = ${req.params.id}`, function (err, results, fields) {
+      res.render('posts', {
+        title: 'prispevky',
+        id: req.params.id,
+        text: results[0].title
+      })
     })
   }
 }
